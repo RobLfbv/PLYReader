@@ -1,0 +1,6 @@
+/target/
+.settings
+.pmd
+.eclipse-pmd
+.ruleset
+/captures/VideoPresentationProjet.mp4
