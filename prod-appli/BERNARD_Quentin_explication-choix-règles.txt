@@ -1,0 +1,38 @@
+//////////////////////////////
+// 5 règles PMD importantes //
+//////////////////////////////
+
+TooManyFields (10)
+-> Permet de regrouper des attributs dans un seul à l'aide d'une classe adéquate (Par exemple : 1 Attribut Coordonnees[x,y,z] au lieu de 3 attributs [x,y,z]).
+
+CommentRecquired
+-> Mon programme sera plus compréhensible pour mes coéquipier.
+
+GodClass
+-> On a la possibilité de rendre le code lisible en subdivisant le code dans des classes d'utilités, donc autant le faire.
+
+LawOfDemeter
+-> C'est important de faire en sorte que mon code soit lisible pour mes coéquipiers.
+
+ExcessiveMethodLength
+-> Permet de rendre le projet plus lisible en subdivisant des méthodes trop longue.
+
+////////////////////////////////////////////////
+// 5 règles PMD problématique mais pas choisi //
+////////////////////////////////////////////////
+
+NcssCount
+-> Permet d'avoir des classes et des méthodes plus lisibles, plus facile de repasser sur le code après.
+
+TooManyMethods
+-> C'est un peu comme GodClass, s'il y a trop de méthode dans une classe, autant les répartir dans des classes d'utilités.
+
+AvoidCatchingGenericException
+-> Permet d'avoir une gestion des exceptions plus polyvalente. Une exception = un cas de figure 
+-> On évite le  ->  }catch(Exception e){
+
+OnlyOneReturn
+-> Utile mais trop contraignant.
+
+AddEmptyString
+-> C'est vrai qu'on pourrait utiliser le .toString() au lieu de faire + " "

@@ -1,5 +1,6 @@
 ply
 format ascii 1.0
+comment nom test
 element vertex 1288
 property float32 x
 property float32 y

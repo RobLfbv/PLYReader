@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<ruleset name="Custom Rules"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Ensemble des règles pour le projet de modelisation
+    </description>
+
+	<rule ref="category/java/design.xml/GodClass" />
+	<rule ref="category/java/design.xml/LawOfDemeter" />
+
+	<rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+		<properties>
+			<property name="problemDepth" value="5" />
+		</properties>
+	</rule>
+
+	<rule ref="category/java/design.xml/TooManyFields">
+		<properties>
+			<property name="maxfields" value="10" />
+		</properties>
+	</rule>
+
+	<rule ref="category/java/design.xml/ExcessiveClassLength">
+		<properties>
+			<property name="minimum" value="300.0" />
+		</properties>
+	</rule>
+
+	<rule ref="category/java/design.xml/NcssCount">
+		<properties>
+			<property name="methodReportLevel" value="40"/>
+			<property name="classReportLevel" value="300"/>
+			<property name="ncssOptions" value=""/>
+		</properties>
+	</rule>
+
+	<rule ref="category/java/bestpractices.xml/UnusedAssignment">
+		<properties>
+			<property name="checkUnusedPrefixIncrement" value="true"/>
+			<property name="reportUnusedVariables" value="false"/>
+		</properties>
+	</rule>
+
+	<rule ref="category/java/bestpractices.xml/UnusedAssignment">
+		<properties>
+		<property name="checkUnusedPrefixIncrement" value="true"/>
+		<property name="reportUnusedVariables" value="false"/>
+		</properties>
+	</rule>
+
+	<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+
+	<rule ref="category/java/codestyle.xml/ClassNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LocalVariableNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LinguisticNaming" />
+	<rule ref="category/java/codestyle.xml/MethodNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FieldNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FormalParameterNamingConventions" />
+
+	<rule ref="category/java/bestpractices.xml/SystemPrintln" />
+	<rule ref="category/java/bestpractices.xml/UnusedAssignment"/>
+
+	<rule ref="category/java/bestpractices.xml/UnusedImports" />
+	<rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
+
+	<rule ref="category/java/codestyle.xml/ShortMethodName">
+		<properties>
+			<property name="minimum" value="3" />
+		</properties>
+	</rule>
+	
+</ruleset>

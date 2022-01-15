@@ -8,9 +8,10 @@ import java.util.Map;
 import compare.Sort;
 import compare.XYZFacesComp;
 import utils.Matrice;
+import view.utils.ColorConstrain;
 
 /**
- * Cette classe sert Ã  stocker tous les points dans une map (avec donc un
+ * Cette classe sert a stocker tous les points dans une map (avec donc un
  * indice) + toutes les faces dans une liste
  */
 public class PLYData {
@@ -27,12 +28,11 @@ public class PLYData {
 	 * Instantie un objet data
 	 */
 	public PLYData() {
-		points = new HashMap<Integer, Point>();
-		faces = new ArrayList<>();
+		this(new HashMap<Integer, Point>(), new ArrayList<>());
 	}
 
 	/**
-	 * Créer un objet data a partir d'une liste de points et d'une liste de faces
+	 * Creer un objet data a partir d'une liste de points et d'une liste de faces
 	 * 
 	 * @param points liste de points
 	 * @param faces  listes de face
@@ -40,12 +40,13 @@ public class PLYData {
 	public PLYData(Map<Integer, Point> points, List<Face> faces) {
 		this.points = points;
 		this.faces = faces;
+		this.setIncludedInFacesOfPoints();
 	}
 
 	/**
-	 * Instantie une copie de la data passï¿½e en parametre
+	 * Instantie une copie de la data passee en parametre
 	 * 
-	 * @param data la data à copier
+	 * @param data la data a copier
 	 */
 	public PLYData(PLYData data) {
 		this();
@@ -57,10 +58,80 @@ public class PLYData {
 		for (Map.Entry<Integer, Point> entry : data.getPoints().entrySet()) {
 			this.putPoint(entry.getKey(), new Point(entry.getValue()));
 		}
+
+		this.setIncludedInFacesOfPoints();
+	}
+
+	private void setIncludedInFacesOfPoints() {
+		for (Face face : faces) {
+			for (int id : face.getPoints()) {
+				points.get(id).addIncludedInFaces(face);
+			}
+		}
 	}
 
 	/**
-	 * Retourne le point correspondant à l'id
+	 * Calcule les couleurs des faces a partir de celles des points
+	 * 
+	 * @param applyToInitColor vrai s'il faut appliquer ce changement aux couleurs
+	 *                         initiales des faces ou non
+	 */
+	public void computeFacesColorsFromPointsColors(boolean applyToInitColor) {
+		for (Face face : faces) {
+			double sumR = 0, sumG = 0, sumB = 0, sumA = 0;
+
+			if (points.get(face.getPoints()[0]).getColor() == null) {
+				face.setColor(null);
+				if (applyToInitColor)
+					face.setInitColor(null);
+			} else {
+
+				for (int idPoint : face.getPoints()) {
+					Point point = points.get(idPoint);
+
+					sumR += point.getColor().getRed();
+					sumG += point.getColor().getGreen();
+					sumB += point.getColor().getBlue();
+					sumA += point.getColor().getOpacity();
+				}
+				int nbPoints = face.getPoints().length;
+				if (applyToInitColor)
+					face.setInitColor(
+							ColorConstrain.color(sumR / nbPoints, sumG / nbPoints, sumB / nbPoints, sumA / nbPoints));
+				face.setColor(ColorConstrain.color(sumR / nbPoints, sumG / nbPoints, sumB / nbPoints, sumA / nbPoints));
+			}
+
+		}
+	}
+
+	/**
+	 * Calcule la couleur des points a partir de celles des faces auxquelles il
+	 * appartient
+	 */
+	public void computePointsColorsFromFacesColors() {
+		for (Map.Entry<Integer, Point> entry : points.entrySet()) {
+			Point point = entry.getValue();
+
+			if (point.getIncludedInFaces().size() == 0 || point.getIncludedInFaces().get(0).getColor() == null) {
+				point.setColor(null);
+			} else {
+				double rSum = 0, gSum = 0, bSum = 0, aSum = 0;
+				for (Face face : point.getIncludedInFaces()) {
+					if (face == null || face.getColor() == null)
+						continue;
+					rSum += face.getColor().getRed();
+					gSum += face.getColor().getGreen();
+					bSum += face.getColor().getBlue();
+					aSum += face.getColor().getOpacity();
+				}
+				int nbFaces = point.getIncludedInFaces().size();
+				point.setColor(ColorConstrain.color(rSum / nbFaces, gSum / nbFaces, bSum / nbFaces, aSum / nbFaces));
+			}
+		}
+	}
+
+	/**
+	 * Retourne le point correspondant a l'id
 	 * 
 	 * @param id l'id
 	 * @return le point correspondant
@@ -74,14 +145,14 @@ public class PLYData {
 	 * 
 	 * @param id    l'id du point
 	 * @param point le point
-	 * @return
+	 * @return le point ajouter
 	 */
 	public Point putPoint(int id, Point point) {
 		return points.put(id, point);
 	}
 
 	/**
-	 * Ajoute une face à la liste des faces
+	 * Ajoute une face a la liste des faces
 	 * 
 	 * @param face la face
 	 */
@@ -90,7 +161,7 @@ public class PLYData {
 	}
 
 	/**
-	 * Applique une transformation de matrice "transformationMatrix" à tous les
+	 * Applique une transformation de matrice "transformationMatrix" a tous les
 	 * points de la data
 	 * 
 	 * @param transformationMatrix la matrice de transformation
@@ -148,12 +219,31 @@ public class PLYData {
 	}
 
 	/**
-	 * récupère la liste des faces
+	 * recupere la liste des faces
 	 * 
 	 * @return la liste
 	 */
 	public List<Face> getFaces() {
 		return faces;
+	}
+
+	/**
+	 * Permet d'avoir le nombre de faces
+	 * 
+	 * @return le nombre de faces
+	 */
+	public int getNbFaces() {
+		return faces.size();
+	}
+
+	/**
+	 * recupere la face d'indice i
+	 * 
+	 * @param i - indice de la face
+	 * @return laface
+	 */
+	public Face getFace(int i) {
+		return faces.get(i);
 	}
 
 	/**
@@ -166,10 +256,10 @@ public class PLYData {
 	}
 
 	/**
-	 * Recupère la coordonée minimale de tous les points
+	 * Recupere la coordonee minimale de tous les points
 	 * 
-	 * @param i (x=0 y=0 z=0)
-	 * @return la coordonnées
+	 * @param i (x=0 y=1 z=2)
+	 * @return la coordonnees
 	 */
 	public double getMin(int i) {
 		double min = Double.MAX_VALUE;
@@ -182,10 +272,10 @@ public class PLYData {
 	}
 
 	/**
-	 * Recupère la coordonée maximale de tous les points
+	 * Recupere la coordonee maximale de tous les points
 	 * 
-	 * @param i (x=0 y=0 z=0)
-	 * @return la coordonnées
+	 * @param i (x=0 y=1 z=2)
+	 * @return la coordonnees
 	 */
 	public double getMax(int i) {
 		double max = Double.MIN_VALUE;
@@ -198,8 +288,8 @@ public class PLYData {
 	}
 
 	/**
-	 * Retourne la moyenne des coordonée de tous les points Utilisé pour avoir une
-	 * approximation de l'echelle du modèle à son chargement
+	 * Retourne la moyenne des coordonee de tous les points Utilise pour avoir une
+	 * approximation de l'echelle du modele a son chargement
 	 * 
 	 * @return la moyenne
 	 */

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<ruleset name="Custom Rules"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        BERNARD Quentin -> Règles personnel pour le projet de modelisation
+    </description>
+
+	<rule ref="category/java/design.xml/TooManyFields">
+		<properties>
+			<property name="maxfields" value="10" />
+		</properties>
+	</rule>
+
+    <rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+		<properties>
+			<property name="problemDepth" value="5" />
+		</properties>
+	</rule>
+
+	<rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables">
+		<properties>
+			<property name="foreachReassign" value="deny" />
+			<property name="forReassign" value="deny" />
+		</properties>
+	</rule>
+
+    <rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingMethodName" />
+
+    <rule ref="category/java/bestpractices.xml/SystemPrintln" />
+
+	<rule ref="category/java/codestyle.xml/ClassNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LocalVariableNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LinguisticNaming" />
+	<rule ref="category/java/codestyle.xml/MethodNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FieldNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FormalParameterNamingConventions" />    
+
+    <rule ref="category/java/design.xml/GodClass" />
+
+	<rule ref="category/java/design.xml/LawOfDemeter" />
+
+    <rule ref="category/java/documentation.xml/CommentRequired">
+    <properties>
+        <property name="methodWithOverrideCommentRequirement" value="Ignored" />
+        <property name="accessorCommentRequirement" value="Ignored" />
+        <property name="classCommentRequirement" value="Required" />
+        <property name="fieldCommentRequirement" value="Required" />
+        <property name="publicMethodCommentRequirement" value="Required" />
+        <property name="protectedMethodCommentRequirement" value="Required" />
+        <property name="enumCommentRequirement" value="Required" />
+        <property name="serialVersionUIDCommentRequired" value="Ignored" />
+        <property name="serialPersistentFieldsCommentRequired" value="Ignored" />
+    </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ShortClassName">
+        <properties>
+            <property name="minimum" value="4"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortMethodName">
+        <properties>
+            <property name="minimum" value="3"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+          <property name="minimum" value="3"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="30.0"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/documentation.xml/UncommentedEmptyConstructor"/>
+    <rule ref="category/java/documentation.xml/UncommentedEmptyMethodBody"/>
+
+</ruleset>
+

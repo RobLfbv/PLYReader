@@ -1,5 +1,9 @@
 ply
 format ascii 1.0
+comment datecreation 11/12/2021
+comment auteur tartenpion
+comment description fichier de test servant a tester les differentes classes
+comment nom Test.ply
 element vertex 4
 property float32 x
 property float32 y

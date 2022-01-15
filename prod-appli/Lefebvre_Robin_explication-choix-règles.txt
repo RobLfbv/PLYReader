@@ -1,0 +1,30 @@
+Les règles que je considère comme les plus importantes:
+	-GodClass:
+		Les gods class c'est hyper important -> pourquoi faire de l'objet si c'est pour faire QUE des Gods Class.
+	-LawOfDemeter:
+		La loi des Demeter permet d'avoir un code plus maintenable dans le temps, ce qui est non négligeable.
+	-NcssCount:
+		Permet d'avoir des classes et des méthodes plus lisible, plus facile de repasser sur le code après.
+	-CommentRequired:
+		Les commentaires sont indispensables à la compréhension du code.
+	-TooManyFields:
+		Encore une fois très importants car c'est l'utilité d'un langage orienté objet.
+
+
+Les règles que je n'ai pas choisies:
+	-CommentSize:
+		Je ne vois pas l'utilité de limiter une explication de code, je préfère laisser autant de ligne que nécessaire pour l'expliquer.
+
+	-AvoidLiteralsInIfCondition:
+		Je que c'est pour plus de lisibilité mais je trouve que parfois c'est rajouter des variables qui servent à rien.
+	
+	-UseDiamondOperator:
+		Dans beaucoup de cas, je trouve que remettre le type dans le diamond operand permet de mettre plus de clartés.
+	
+	-OnlyOneReturn:
+		C'est trop contraignant.
+	
+	-AddEmptyString:
+		Encore une fois trop contraignant à mes yeux surtout que je ne vois pas le problème de rajouter du texte de cette manière.	
+
+	
