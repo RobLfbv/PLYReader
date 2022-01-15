@@ -1,5 +1,6 @@
 ply
 format ascii 1.0
+comment nom Vache
 element vertex 2903
 property float32 x
 property float32 y

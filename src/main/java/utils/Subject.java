@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe qui définit les classes sujets dans le patron MVC
+ * Classe qui definit les classes sujets dans le patron MVC
  */
 public abstract class Subject {
 	/**
@@ -28,6 +28,15 @@ public abstract class Subject {
 		if (!attached.contains(obs)) {
 			attached.add(obs);
 		}
+	}
+
+	/**
+	 * Detache un observer de son sujet
+	 * 
+	 * @param obs l'observer
+	 */
+	public void detach(Observer obs) {
+		attached.remove(obs);
 	}
 
 	/**

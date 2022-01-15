@@ -24,8 +24,7 @@ public class Matrice {
 	}
 
 	/**
-	 * cree une matrice de taille rows*cols non initialis�e (ne contenant que des
-	 * 0)
+	 * cree une matrice de taille rows*cols non initialisee (ne contenant que des 0)
 	 * 
 	 * @param rows nombre de lignes
 	 * @param cols nombre de colones
@@ -48,9 +47,9 @@ public class Matrice {
 	/**
 	 * modifie la valeur en position x=col y=row dans la matrice
 	 * 
-	 * @param row numero de la ligne
-	 * @param col numero de la colone
-	 * @value la valeur a mettre a cet emplacement
+	 * @param row   numero de la ligne
+	 * @param col   numero de la colone
+	 * @param value la valeur a mettre a cet emplacement
 	 */
 	public void set(int row, int col, double value) {
 		this.tab[row][col] = value;
@@ -124,7 +123,7 @@ public class Matrice {
 	}
 
 	/**
-	 * renvoie pour chaque colone le nombre de caract�re max pris par un element
+	 * renvoie pour chaque colone le nombre de caractere max pris par un element
 	 * 
 	 * @return tableau de taille nbCol contenant toutes ces valeurs
 	 */

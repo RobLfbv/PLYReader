@@ -1,5 +1,7 @@
 ply
 format ascii 1.0
+comment auteur spider
+comment nom big_spider
 element vertex 4670
 property float32 x
 property float32 y

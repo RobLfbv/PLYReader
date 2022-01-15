@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<ruleset name="prod-appli"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>Règles à respecter dans le projet modélisation</description>
+
+    <rule ref="category/java/design.xml/NcssCount">
+        <properties>
+            <property name="methodReportLevel" value="50" />
+            <property name="classReportLevel" value="200" />
+            <property name="ncssOptions" value="" />
+        </properties>
+    </rule>
+
+	<rule ref="category/java/design.xml/AvoidCatchingGenericException" />
+	<rule ref="category/java/codestyle.xml/UseDiamondOperator" />
+
+	<rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+		<properties>
+			<property name="problemDepth" value="3" />
+		</properties>
+	</rule>
+	
+	<rule ref="category/java/errorprone.xml/AvoidLiteralsInIfCondition" />
+
+    <!--Le nombre d’attributs d’une classe est au plus 10-->
+	<rule ref="category/java/design.xml/TooManyFields">
+		<properties>
+			<property name="maxfields" value="10" />
+		</properties>
+	</rule>
+
+	<!--La variable d’une boucle for ou foreach n’est pas réassignée dans la boucle.-->
+	<rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables">
+		<properties>
+			<property name="foreachReassign" value="deny" />
+			<property name="forReassign" value="deny" />
+		</properties>
+	</rule>
+
+	<!--Les variables locales sont déclarées au plus près de là où elles sont utilisées (ne sont pas déclarées prématurément)-->
+	<rule ref="category/java/codestyle.xml/PrematureDeclaration" />
+
+	<!--Un attribut ne peut pas avoir le même nom qu’une méthode de la classe-->
+	<rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingMethodName" />
+
+	<!--Les for peuvent être des foreach-->
+	<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+
+	<!--pas plus de 10 assert dans un test-->
+	<rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
+		<properties>
+			<property name="maximumAsserts" value="10" />
+		</properties>
+	</rule>
+
+	<!--Les test doivent avoir au moins un assert-->
+	<rule ref="category/java/bestpractices.xml/JUnitTestsShouldIncludeAssert" />
+
+	<rule ref="category/java/bestpractices.xml/SystemPrintln" />
+	<rule ref="category/java/bestpractices.xml/UnusedAssignment"/>
+
+	<rule ref="category/java/bestpractices.xml/UnusedImports" />
+	<rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
+
+	<!--Naming conventions-->
+	<rule ref="category/java/codestyle.xml/ClassNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LocalVariableNamingConventions" />
+	<rule ref="category/java/codestyle.xml/LinguisticNaming" />
+	<rule ref="category/java/codestyle.xml/MethodNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FieldNamingConventions" />
+	<rule ref="category/java/codestyle.xml/FormalParameterNamingConventions" />
+
+	<!--Name length-->
+	<rule ref="category/java/codestyle.xml/ShortMethodName">
+		<properties>
+			<property name="minimum" value="3" />
+		</properties>
+	</rule>
+
+	<rule ref="category/java/design.xml/GodClass" />
+	<rule ref="category/java/design.xml/LawOfDemeter" />
+
+	<rule ref="category/java/codestyle.xml/UnnecessaryReturn" />
+
+
+	<rule ref="category/java/design.xml/ExcessiveClassLength">
+		<properties>
+			<property name="minimum" value="300.0" />
+		</properties>
+	</rule>
+
+	<!--Empty trucs-->
+	<rule ref="category/java/errorprone.xml/EmptyFinallyBlock" />
+	<rule ref="category/java/errorprone.xml/EmptyIfStmt" />
+	<rule ref="category/java/errorprone.xml/EmptyInitializer" />
+	<rule ref="category/java/errorprone.xml/EmptyStatementBlock" />
+	<rule ref="category/java/errorprone.xml/EmptyStatementNotInLoop" />
+	<rule ref="category/java/errorprone.xml/EmptySwitchStatements" />
+	<rule ref="category/java/errorprone.xml/EmptyTryBlock" />
+	<rule ref="category/java/errorprone.xml/EmptyWhileStmt" />
+	<rule ref="category/java/errorprone.xml/EqualsNull" />
+
+	<!--Doc-->
+	<rule ref="category/java/documentation.xml/CommentRequired">
+		<properties>
+			<property name="methodWithOverrideCommentRequirement" value="Ignored" />
+			<property name="accessorCommentRequirement" value="Ignored" />
+			<property name="classCommentRequirement" value="Required" />
+			<property name="fieldCommentRequirement" value="Required" />
+			<property name="publicMethodCommentRequirement" value="Required" />
+			<property name="protectedMethodCommentRequirement" value="Required" />
+			<property name="enumCommentRequirement" value="Required" />
+			<property name="serialVersionUIDCommentRequired" value="Ignored" />
+			<property name="serialPersistentFieldsCommentRequired" value="Ignored" />
+		</properties>
+	</rule>
+	<rule ref="category/java/documentation.xml/UncommentedEmptyConstructor" />
+	<rule ref="category/java/documentation.xml/UncommentedEmptyMethodBody" />
+
+</ruleset>

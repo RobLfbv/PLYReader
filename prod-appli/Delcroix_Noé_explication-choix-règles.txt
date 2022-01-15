@@ -1,0 +1,26 @@
+5 règles PMD que tu as choisi pour ton projet :
+
+- GodClass, ExcessiveClassLength, TooManyFields, NcssCount
+	Principe de base de la programation orienté objet : décomposer le problème en classes. Il ne faut pas de classes trop longues ou trop complexes
+- LawOfDemeter
+	Permet des classes plus maintenables dans le temps.
+- AvoidDeeplyNestedIfStmts, NcssCount
+	Forcent la décomposition en fonctions : empêche d'avoir des methodes trop complexes ou trop longues
+- ShortMethodName
+	Permet d'avoir un code plus clair et de comprendre ce que fait une methode seulement à partir de son nom
+- SystemPrintln
+	Permet de ne pas oublier de laisser des lignes de debug dans le code
+
+
+5 règles PMD qui posent actuellement problème dans ton projet Modélisation mais que tu n’as pas choisi.
+
+- CommentSize
+	Force à faire des commentaires courts : parfois pas assez pour expliquer ce que fait une methode, force à être concis même possibilité de perdre en clarté dans l'explication
+- UseDiamondOperator
+	Si la declaration de la variable n'est pas à coté de l'affectation, cette règle empeche de voir le type de l'objet utilisé : pas pratique pour la lisibilité
+- UseUtilityClass
+	Je ne connaissait pas cette règle
+- AvoidLiteralsInIfCondition
+	Dans certains cas, cette règle sert 
+- OnlyOneReturn
+	Pas d'avantage à l'utiliser, peut empecher la clarté du code, est fortement contraignant

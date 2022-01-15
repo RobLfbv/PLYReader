@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<ruleset name="Custom Rules"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Ensemble des règles pour le projet de modelisation
+    </description>
+    <!--Les gods class c'est hyper important -> pourquoi faire de l'objet si c'est pour faire QUE des Gods Class-->
+<rule ref="category/java/design.xml/GodClass"/>
+    <!--La loi des Demeter permet d'avoir un code plus maintenable dans le temps-->
+<rule ref="category/java/design.xml/LawOfDemeter"/>
+<!--Permet d'avoir des classes et des méthodes plus lisible, plus facile de repasser sur le code après-->
+<rule ref="category/java/design.xml/NcssCount">
+    <properties>
+        <property name="methodReportLevel" value="40"/>
+        <property name="classReportLevel" value="300"/>
+        <property name="ncssOptions" value=""/>
+    </properties>
+</rule>
+<!--Les commentaires sont indispensables à la compréhension du code-->
+<rule ref="category/java/documentation.xml/CommentRequired">
+    <properties>
+        <property name="methodWithOverrideCommentRequirement" value="Ignored"/>
+        <property name="accessorCommentRequirement" value="Ignored"/>
+        <property name="classCommentRequirement" value="Required"/>
+        <property name="fieldCommentRequirement" value="Required"/>
+        <property name="publicMethodCommentRequirement" value="Required"/>
+        <property name="protectedMethodCommentRequirement" value="Required"/>
+        <property name="enumCommentRequirement" value="Required"/>
+        <property name="serialVersionUIDCommentRequired" value="Ignored"/>
+        <property name="serialPersistentFieldsCommentRequired" value="Ignored"/>
+    </properties>
+</rule>
+
+<!--Rajoute de la lisibilité au code-->
+<rule ref="category/java/codestyle.xml/UnnecessaryReturn"/>
+
+<!--Evite potentiellement de gros bug, si il y a un index à changer dans un for faut faire un while-->
+<rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables">
+	<properties>
+		<property name="foreachReassign" value="deny" />
+		<property name="forReassign" value="deny" />
+	</properties>
+</rule>
+
+<!--Simple optimisation-->
+<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+
+<!--Evite les cascades de if-->
+<rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+	<properties>
+		<property name="problemDepth" value="5" />
+	</properties>
+</rule>
+
+<!--Le nombre d’attributs d’une classe est au plus 10-->
+<rule ref="category/java/design.xml/TooManyFields">
+	<properties>
+		<property name="maxfields" value="10" />
+	</properties>
+</rule>
+
+<!--Naming conventions-->
+<rule ref="category/java/codestyle.xml/ClassNamingConventions" />
+<rule ref="category/java/codestyle.xml/LocalVariableNamingConventions" />
+<rule ref="category/java/codestyle.xml/LinguisticNaming" />
+<rule ref="category/java/codestyle.xml/MethodNamingConventions" />
+<rule ref="category/java/codestyle.xml/FieldNamingConventions" />
+<rule ref="category/java/codestyle.xml/FormalParameterNamingConventions" />
+
+<!--Toutes les règles qui permettent d'éviter plein de choses vide-->
+<rule ref="category/java/errorprone.xml/EmptyFinallyBlock" />
+<rule ref="category/java/errorprone.xml/EmptyIfStmt" />
+<rule ref="category/java/errorprone.xml/EmptyInitializer" />
+<rule ref="category/java/errorprone.xml/EmptyStatementBlock" />
+<rule ref="category/java/errorprone.xml/EmptyStatementNotInLoop" />
+<rule ref="category/java/errorprone.xml/EmptySwitchStatements" />
+<rule ref="category/java/errorprone.xml/EmptyTryBlock" />
+<rule ref="category/java/errorprone.xml/EmptyWhileStmt" />
+<rule ref="category/java/errorprone.xml/EqualsNull" />
+
+<!--Taille des noms de méthodes-->
+<rule ref="category/java/codestyle.xml/ShortMethodName">
+	<properties>
+		<property name="minimum" value="3" />
+	</properties>
+</rule>
+</ruleset>
+

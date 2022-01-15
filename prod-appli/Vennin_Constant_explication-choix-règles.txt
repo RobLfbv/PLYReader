@@ -1,0 +1,12 @@
+AvoidDeeplyNestedIfStmts car cela signifie que le code n'est pas correctement décomposé, il est illisible.
+CommentRequired car cela est indispensable pour un bon projet.
+Empty* (remplacer l'étoile par les differentes structures) car un code inutile n'a pas sa place.
+GodClass car cela signifie que le code n'est pas suffisamment décomposé
+LawOfDemeter car cela engendre des lignes de code inutilement trop longues et incompréhensibles.
+
+
+CommentSize les commentaires sont utiles au projet, il ne faudrait pas se limiter au risque de mal expliquer
+OnlyOneReturn limite grandement les possibilités sur nos méthodes, et facilite leur écriture
+UseDiamondOperator car cela fait perdre en lisibilité à notre projet si l'on respecte cette règle
+UseUtilityClass car il est très pratique afin de raccourcir la taille du code, ça n'est pas important si on fait en sorte de le rendre facilement lisible
+AddEmptyString car cela est assez contraignant, sans être très utile pour le projet

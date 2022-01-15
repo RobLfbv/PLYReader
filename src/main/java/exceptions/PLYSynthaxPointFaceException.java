@@ -12,7 +12,7 @@ public class PLYSynthaxPointFaceException extends CustomException {
 	 * 
 	 * @param name        - le titre de l'erreur exemple: "Synthax point"
 	 * @param description - description de l'erreur
-	 * @param line        - ligne à laquelle se trouve l'erreur
+	 * @param line        - ligne a laquelle se trouve l'erreur
 	 */
 	public PLYSynthaxPointFaceException(String name, String description, int line) {
 		super(name, description + line);

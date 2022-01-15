@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Classe abstraite pour les nouvelles exceptions créé
+ * Classe abstraite pour les nouvelles exceptions cree
  *
  */
 @SuppressWarnings("serial")
@@ -11,6 +11,11 @@ public abstract class CustomException extends Exception {
 	 */
 	private String name;
 
+	/**
+	 * Renvoie le nom de l'exception
+	 * 
+	 * @return le nom de l'exception
+	 */
 	public String getName() {
 		return name;
 	}

@@ -1,15 +1,19 @@
 package sides;
 
+import sides.individualsides.PositiveXSide;
+import sides.individualsides.PositiveYSide;
+import sides.individualsides.PositiveZSide;
+
 /**
- * Classe qui crée des classes side a partir d'un string (leur nom) Patron de
+ * Classe qui cree des classes side a partir d'un string (leur nom) Patron de
  * conception : Fabrique
  */
 public class SidesFabrique {
 	/**
-	 * crée une classes side a partir d'un string
+	 * cree une classes side a partir d'un string
 	 * 
 	 * @param string le nom
-	 * @return un coté
+	 * @return un cote
 	 */
 	public Side create(String string) {
 		if (string.equals("Positive X")) {

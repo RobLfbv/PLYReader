@@ -2,22 +2,22 @@ package utils;
 
 /**
  * 
- * Classe qui défini les classes observées selon le patron MVC
+ * Classe qui defini les classes observees selon le patron MVC
  *
  */
 public interface Observer {
 	/**
-	 * methode appelé pour mettre à jours tous les observers
+	 * methode appele pour mettre a jours tous les observers
 	 * 
-	 * @param subj le sujet qui est observé
+	 * @param subj le sujet qui est observe
 	 */
 	public void update(Subject subj);
 
 	/**
-	 * methode appelé pour mettre à jours tous les observers
+	 * methode appele pour mettre a jours tous les observers
 	 * 
-	 * @param subj le sujet qui est observé
-	 * @param data possibilité de passer des parametres sur le sujet aux observers
+	 * @param subj le sujet qui est observe
+	 * @param data possibilite de passer des parametres sur le sujet aux observers
 	 */
 	public void update(Subject subj, Object data);
 }

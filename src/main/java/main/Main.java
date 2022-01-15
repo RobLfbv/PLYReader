@@ -3,7 +3,7 @@ package main;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
-import view.View;
+import view.windows.MainWindow;
 
 /**
  * Classe principale qui lance l'application
@@ -20,12 +20,12 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Methode qui lance application (appelée depuis le main)
+	 * Methode qui lance application (appelee depuis le main)
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// System.out.println("================== Running Main ==================");
 		Model model = new Model();
-		new View(model);
+		new MainWindow(model);
 	}
 }

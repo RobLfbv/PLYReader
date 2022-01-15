@@ -5,14 +5,16 @@ import java.util.List;
 import model.Face;
 
 /**
- * Cette classe permet de trier une liste de faces
+ * Cette classe permettait de trier une liste de faces, elle a ete remplace par
+ * Collections.Sort()
  */
-public class Sort {
+public final class Sort {
 	/**
 	 * Permets de faire un tri par insertion en utilisant la dichitomie
 	 * 
-	 * @param c - un objet qui permet de determiner par rapport à quoi le tri va
-	 *          etre fait (ex: par rapport à Z, à X ou à Y)
+	 * @param comparator - un objet qui permet de determiner par rapport a quoi le
+	 *                   tri va etre fait (ex: par rapport a Z, a X ou a Y)
+	 * @param faces      - la liste des faces a trier
 	 */
 	static public void insertionSortFace(XYZFacesComp comparator, List<Face> faces) {
 		for (int i = 1; i < faces.size(); i++) {
@@ -23,9 +25,9 @@ public class Sort {
 	/**
 	 * Intervertit les valeurs dans la liste avec une recherche dichitomique
 	 * 
-	 * @param comparator - un objet qui permet de determiner par rapport à quoi le
-	 *                   tri va etre fait (ex: par rapport à Z, à X ou à Y)
-	 * @param idx        - à quelle indice on se trouve
+	 * @param comparator - un objet qui permet de determiner par rapport a quoi le
+	 *                   tri va etre fait (ex: par rapport a Z, a X ou a Y)
+	 * @param idx        - a quelle indice on se trouve
 	 */
 	static private void shiftValueFace(XYZFacesComp comparator, int idx, List<Face> faces) {
 		Face val = faces.get(idx);
@@ -47,10 +49,10 @@ public class Sort {
 	/**
 	 * Intervertit les valeurs dans la liste
 	 * 
-	 * @param index1 - l'indice du premier element à intervertir
-	 * @param index2 - l'indice du deuxième element à intervertir
+	 * @param index1 - l'indice du premier element a intervertir
+	 * @param index2 - l'indice du deuxieme element a intervertir
 	 */
-	static void swap(int index1, int index2, List<Face> faces) {
+	private static void swap(int index1, int index2, List<Face> faces) {
 		Face temporary = faces.get(index1);
 		faces.set(index1, faces.get(index2));
 		faces.set(index2, temporary);
@@ -59,15 +61,16 @@ public class Sort {
 	/**
 	 * Partitione avec un pivot la liste de face et la tri dans l'intervalle demande
 	 * 
-	 * @param comparator - l'objet qui permet de determiner par rapport à quoi on
+	 * @param comparator - l'objet qui permet de determiner par rapport a quoi on
 	 *                   tri
 	 * @param beginning  - l'indice de la premiere borne de l'intervalle sur lequel
 	 *                   on va trier et creer des partitions
 	 * @param end        - l'indice de la derniere borne de l'intervalle sur lequel
 	 *                   on va trier et creer des partitions
+	 * @param faces      - liste de face a trier
 	 * @return renvoie l'indice du pivot
 	 */
-	static int partition(XYZFacesComp comparator, int beginning, int end, List<Face> faces) {
+	private static int partition(XYZFacesComp comparator, int beginning, int end, List<Face> faces) {
 		int counter = beginning;
 		Face pivot = faces.get(beginning);
 		for (int i = beginning + 1; i <= end; i++) {
@@ -82,11 +85,13 @@ public class Sort {
 
 	/**
 	 * Fait les plusieurs appelles necesaires pour faire le tri de toutes les
-	 * partitions avec le premier qui détermine le pivot à chaque recursivite
+	 * partitions avec le premier qui determine le pivot a chaque recursivite
 	 * 
-	 * @param comparator
-	 * @param beginning
-	 * @param end
+	 * @param comparator - un objet qui permet de determiner par rapport a quoi le
+	 *                   tri va etre fait (ex: par rapport a Z, a X ou a Y)
+	 * @param beginning  - indice indiquant la borne de debut de la liste
+	 * @param end        - indice indiquant la borne de fin de la liste
+	 * @param faces      - liste de face a trier
 	 */
 	static public void quickSortFace(XYZFacesComp comparator, int beginning, int end, List<Face> faces) {
 		if (beginning < end) {
@@ -97,7 +102,7 @@ public class Sort {
 	}
 
 	/**
-	 * Renvoie l'indice de l'enfant de gauche du parent en paramètre
+	 * Renvoie l'indice de l'enfant de gauche du parent en parametre
 	 * 
 	 * @param parentIndex - l'indice du parent
 	 * @return renvoie l'indice de l'element de gauche
@@ -107,7 +112,7 @@ public class Sort {
 	}
 
 	/**
-	 * Renvoie l'indice de l'enfant de droite du parent en paramètre
+	 * Renvoie l'indice de l'enfant de droite du parent en parametre
 	 * 
 	 * @param parentIndex - l'indice du parent
 	 * @return renvoie l'indice de l'element de droite
@@ -117,9 +122,9 @@ public class Sort {
 	}
 
 	/**
-	 * Vérifie et replace une valeur max à l'index indique afin d'avoir un tas
+	 * Verifie et replace une valeur max a l'index indique afin d'avoir un tas
 	 * 
-	 * @param comparator - l'objet qui permet de determiner par rapport à quel axe
+	 * @param comparator - l'objet qui permet de determiner par rapport a quel axe
 	 *                   on tri
 	 * @param list       - la liste de faces
 	 * @param listLength - taille de la liste
@@ -152,9 +157,9 @@ public class Sort {
 	}
 
 	/**
-	 * Renvoie la valeur max de la liste après l'avoir retire
+	 * Renvoie la valeur max de la liste apres l'avoir retire
 	 * 
-	 * @param comparator - l'objet qui permet de determiner par rapport à quel axe
+	 * @param comparator - l'objet qui permet de determiner par rapport a quel axe
 	 *                   on tri
 	 * @param list       - la liste de faces
 	 * @param listLength - taille de la liste
@@ -171,10 +176,10 @@ public class Sort {
 	}
 
 	/**
-	 * Transforme en tas la liste donné en paramètre en appelant la methode
+	 * Transforme en tas la liste donne en parametre en appelant la methode
 	 * bubbleDown pour chaque indice de la liste
 	 * 
-	 * @param comparator - l'objet qui permet de determiner par rapport à quel axe
+	 * @param comparator - l'objet qui permet de determiner par rapport a quel axe
 	 *                   on tri
 	 * @param list       - la liste de faces
 	 */
@@ -185,9 +190,9 @@ public class Sort {
 	}
 
 	/**
-	 * Transforme en tas la liste donné en paramètre puis la tri
+	 * Transforme en tas la liste donne en parametre puis la tri
 	 * 
-	 * @param comparator - l'objet qui permet de determiner par rapport à quel axe
+	 * @param comparator - l'objet qui permet de determiner par rapport a quel axe
 	 *                   on tri
 	 * @param list       - la liste de faces
 	 */

@@ -21,9 +21,9 @@ Quentin BERNARD Groupe H
 ## Autres éléments demandés
 
 - [X] Tests pour les classes de calcul mathématique
-- [ ] Captures d'écran pour le rendu
-- [ ] Vidéo de présentation du rendu
-- [ ] Respect du format de rendu (cf Moodle)
+- [X] Captures d'écran pour le rendu
+- [X] Vidéo de présentation du rendu
+- [X] Respect du format de rendu (cf Moodle)
 
 ## Distribution du travail (qui a fait quoi)
 - **Robin**: Tri, Comparateurs, Matrice, Tests de tri et tests des classes de calculs mathématiques
@@ -58,28 +58,43 @@ Quentin BERNARD Groupe H
 - [X] Affichage faces seulement / segments seulement
 - [X] Affichage avancé de la bibliothèque de modèles
 - [X] Recherche dans la bibliothèque de modèles
-- [ ] Éditer les informations sur un modèle
+- [X] Éditer les informations sur un modèle
 - [X] Modèle centré
-- [ ] Éclairage
-- [ ] Lissage
-- [ ] Ombre portée
+- [X] Éclairage
+- [X] Lissage
+- [X] Ombre portée
 - [ ] Vue en tranches
-- [ ] Controleur horloge
-- [ ] Autres, préciser
+- [X] Controleur horloge
+- [X] Autres, préciser
+    - Interface evolué (presets pour les canvas, renommage des fichiers ply depuis l'appli)
+    - Rendu seulement des face visibles (du bon coté)
+    - Customisation des couleurs (faces,fond,arrêtes)
 
 ## Autres exigences
 
-- [ ] Tests unitaires
-- [ ] Diagramme de classes UML
-- [ ] Javadoc
-- [ ] Captures d'écran
-- [ ] Vidéo de présentation
-- [ ] Respect du format de rendu
+- [X] Tests unitaires
+- [X] Diagramme de classes UML
+- [X] Javadoc
+- [X] Captures d'écran
+- [X] Vidéo de présentation
+- [X] Respect du format de rendu
 
 ## Distribution du travail (qui a fait quoi)
 
+- **Robin**: Calculs de la lumière (vecteurs et tests), Calculs de l'ombre portée
+
+- **Constant**: Parseur evolué, edition des meta données des fichiers ply (commentaires)
+
+- **Noé**: Toute l'interface, lissage
+
+- **Quentin**: controlleur horloge
+
+- **Tous**: Javadoc, cleancode
 
 ## Difficultés rencontrées
 
+- Ombre Portée : N'ayant pas eu de cours sur les maths derrière l'ombre portée et n'ayant pas eu de réponse lorsque nous avons demander de l'aide par mail, nous avons proposé une solution de calcul de l'ombre qui n'est pas forcement comme attendu
 
+- Le controlleur horloge : il fallait comprendre qu'on devait utiliser les Threads de JavaFX (AnimationTimer) et pas les Thread de Java qui faisaient planter notre application car il n'attendait pas la fin du rendu avant d'en lancer un autres.
 
+- Les lois de Demeter : Certains cas nous semblent impossible à regler. Pour d'autre, nous avons juste l'impression de rajouter des getters dans des classes où il n'ont pas l'air à leur places et ainsi avoir des classes trop longues qui risquent de ne plus respecter la règles des 200 lignes par classes. Nous n'avons donc pas réglé toutes les lois de Demeter.

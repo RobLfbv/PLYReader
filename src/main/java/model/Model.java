@@ -1,14 +1,22 @@
 package model;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import utils.Matrice;
+import model.plyreader.PLYReader;
 import utils.Subject;
-import utils.TransformationMatrice;
-import utils.TransformationType;
+import utils.transformations.Transformation;
+import utils.transformations.TransformationScale;
+import utils.transformations.TransformationType;
+import utils.transformations.TransformationXTranslation;
+import utils.transformations.TransformationYTranslation;
+import utils.transformations.TransformationZTranslation;
+import view.utils.Parameters;
+import view.utils.Shadow;
 
 /**
- * Cette classe sert à instancier et interragir avec un fichier PLY
+ * Cette classe sert a instancier et interragir avec un fichier PLY
  */
 public class Model extends Subject {
 	/**
@@ -17,15 +25,20 @@ public class Model extends Subject {
 	 */
 	private PLYData data;
 	/**
+	 * data - Objet de type PLYData qui contient toutes les informations contenues
+	 * dans le fichier PLY et auxquelles sont appliquees les transformations
+	 */
+	private PLYData transformedData;
+	/**
 	 * repere - Objet de type Repere qui represente le repere utilise pour les
 	 * transformations
 	 */
 	private Repere repere;
+
 	/**
-	 * transformedData - Objet de type PLYData qui contient toutes les informations
-	 * contenues dans le fichier PLY une fois transformé
+	 * Le presse papier pour stocker les parametres du canvas
 	 */
-	private PLYData transformedData;
+	private Parameters parametersClipboard;
 
 	/**
 	 * Constructeur du Model
@@ -33,61 +46,91 @@ public class Model extends Subject {
 	public Model() {
 		this.data = new PLYData();
 		this.transformedData = new PLYData();
-		this.repere = new Repere();
+		this.repere = new Repere(this);
 	}
 
 	/**
-	 * Chargement du fichier avec la modification matriciel par défaut
+	 * Chargement du fichier avec la modification matriciel par defaut
 	 * 
-	 * @param file
+	 * @param file - le fichier
 	 */
 	public void loadFromFile(File file) {
 		this.loadFromFile(file, true);
 	}
 
 	/**
-	 * Chargement du fichier avec la possibilités de faire ou non la modificiation
-	 * matriciel -> Utile de la désactivé pour les tests
+	 * Chargement du fichier avec la possibilites de faire ou non la modificiation
+	 * matriciel -> Utile de la desactive pour les tests
 	 * 
 	 * @param file
 	 * @param doTransfo
 	 */
-	public void loadFromFile(File file, boolean doTransfo) {
+	private void loadFromFile(File file, boolean doTransfo) {
 		this.data = new PLYData();
-		LoadingFilePLY.readFilePLY(this, file);
-
+		PLYReader plyReader = new PLYReader();
+		if (!plyReader.readFilePLY(this, file))
+			return;
 		if (doTransfo)
 			this.transformationToCenter();
 		this.repere.reset();
-		this.transformedData = new PLYData(this.data);
-		this.notifyObservers();
+		Shadow.getInstance(data).setSol(data.getMin(1));
+
+		data.computeFacesColorsFromPointsColors(true);
+
+		transformedData = new PLYData(this.data);
+		this.notifyObservers(transformedData);
 	}
 
 	/**
-	 * Applique une transformation matriciel à la data afin de centrer l'objet à
-	 * son chargement
+	 * Applique une transformation matriciel a la data afin de centrer l'objet a son
+	 * chargement
 	 */
-	public void transformationToCenter() {
-		this.getData().applyTransformationWithMatrix(
-				new TransformationMatrice(TransformationType.SCALE).get(1600 / this.getData().getAverageAbsoluteXYZ()));
 
-		this.getData()
-				.applyTransformationWithMatrix(new TransformationMatrice(TransformationType.TRANSLATION).get(
-						(this.getData().getMax(0) + this.getData().getMin(0)) / -2,
-						(this.getData().getMax(1) + this.getData().getMin(1)) / -2,
-						(this.getData().getMax(2) + this.getData().getMin(2)) / -2));
+	public void transformationToCenter() {
+		final int screenWidth = 1600;
+		this.getData().applyTransformationWithMatrix(
+				new TransformationScale(screenWidth / this.getData().getAverageAbsoluteXYZ()).get());
+		this.getData().applyTransformationWithMatrix(
+				new TransformationXTranslation((this.getData().getMax(0) + this.getData().getMin(0)) / -2).get());
+		this.getData().applyTransformationWithMatrix(
+				new TransformationYTranslation((this.getData().getMax(1) + this.getData().getMin(1)) / -2).get());
+		this.getData().applyTransformationWithMatrix(
+				new TransformationZTranslation((this.getData().getMax(2) + this.getData().getMin(2)) / -2).get());
 	}
 
 	public PLYData getData() {
 		return this.data;
 	}
 
-	public void setData(PLYData data) {
-		this.data = data;
-	}
-
 	public PLYData getTransformedData() {
 		return transformedData;
+	}
+
+	public Repere getRepere() {
+		return repere;
+	}
+
+	/**
+	 * Retourne le parametre du repere correspondant
+	 * 
+	 * @param type le type du parametre que l'on veut obtenir
+	 * @return la valeur
+	 */
+	public Double getRepereParameter(TransformationType type) {
+		return repere.getParameter(type);
+	}
+
+	public void setData(PLYData data) {
+		this.data = data;
+		this.transformedData = data;
+	}
+
+	public void setParametersClipboard(Parameters parameters) {
+		this.parametersClipboard = new Parameters(parameters);
+	}
+
+	public Parameters getParametersClipboard() {
+		return parametersClipboard;
 	}
 
 	@Override
@@ -96,25 +139,37 @@ public class Model extends Subject {
 	}
 
 	/**
-	 * Remet à zéro la data transformé, toutes les transformations et rotations
-	 * sont annulées
+	 * Remet a zero la data transforme, toutes les transformations et rotations sont
+	 * annulees
 	 */
 	public void resetTransformation() {
 		this.repere.reset();
-		this.transformedData = new PLYData(this.data);
-		this.notifyObservers();
+		transformedData = new PLYData(data);
+		this.notifyObservers(transformedData);
+	}
+
+	/**
+	 * Applique la transformation au model
+	 * 
+	 * @param transformationMatrice - la matrice de transformation a appliquer
+	 */
+	public void applyTransformation(Transformation transformationMatrice) {
+		List<Transformation> transformationMatrices = new ArrayList<>();
+		transformationMatrices.add(transformationMatrice);
+		this.applyTransformation(transformationMatrices);
 	}
 
 	/**
 	 * Applique la transformation de la matrice
 	 * 
-	 * @param transformationMatrix - Transformation à appliquer
+	 * @param transformationMatrices - Transformation a appliquer
 	 */
-	public void applyTransformation(Matrice transformationMatrix) {
-		this.repere.applyTransformationWithMatrix(transformationMatrix);
-		this.transformedData = new PLYData(this.data);
-		this.transformedData.applyTransformationWithMatrix(this.repere.getMatrix());
-		this.notifyObservers();
+	public void applyTransformation(List<Transformation> transformationMatrices) {
+		this.repere.applyTransformation(transformationMatrices);
+		for (Transformation transformationMatrice : transformationMatrices) {
+			this.transformedData.applyTransformationWithMatrix(transformationMatrice.get());
+		}
+		this.notifyObservers(transformationMatrices);
 	}
 
 }

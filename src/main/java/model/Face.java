@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+
+import javafx.scene.paint.Color;
+import view.utils.ColorConstrain;
 
 /**
- * Cette classe sert à répertorier les indices (dans la Map de PLYData) des
+ * Cette classe sert a repertorier les indices (dans la Map de PLYData) des
  * points et la couleur qui constituent la face
  */
 public class Face {
@@ -20,6 +22,14 @@ public class Face {
 	 * Couleur de la face
 	 */
 	private Color color;
+	/**
+	 * Couleur initial de la face si il n'y a pas de couleur
+	 */
+	private Color colorInit;
+	/**
+	 * Boolean pour savoir si la face est a afficher
+	 */
+	private boolean visible;
 
 	/**
 	 * Creer une nouvelle faace
@@ -27,9 +37,11 @@ public class Face {
 	 * @param points = indice des points qui constitue la face
 	 * @param color  = couleur de la face fournis dans le PLY
 	 */
-	public Face(int[] points, Color color) {
+	private Face(int[] points, Color color) {
 		this.points = points;
 		this.color = color;
+		this.colorInit = color;
+		this.visible = true;
 	}
 
 	/**
@@ -39,14 +51,12 @@ public class Face {
 	 */
 	public Face(int[] points) {
 		this(points, null);
-		// this(points, new Color((int)(Math.random()*255),
-		// (int)(Math.random()*255),(int)(Math.random()*255)));
 	}
 
 	/**
-	 * Instantie une copie de la face pass�e en param�tre
+	 * Instantie une copie de la face passee en parametre
 	 * 
-	 * @param face
+	 * @param face - une face a copier
 	 */
 	public Face(Face face) {
 		this.points = new int[face.getNumberOfPoints()];
@@ -55,26 +65,19 @@ public class Face {
 			this.points[i] = face.getPoints()[i];
 		}
 
-		if (face.color == null) {
-			this.color = null;
+		if (face.getColorInit() == null) {
+			this.colorInit = null;
 		} else {
-			this.color = new Color(face.getColor());
+			Color prev = face.getColorInit();
+			this.colorInit = ColorConstrain.color(prev.getRed(), prev.getGreen(), prev.getBlue(), prev.getOpacity());
 		}
+		this.color = null;
 	}
 
 	/**
-	 * Retourne un tableau d'indices de points qui constituent la face
-	 * 
-	 * @return tableau d'indices
-	 */
-	public int[] getPointsIds() {
-		return points;
-	}
-
-	/**
-	 * Récupère tous les points depuis data
+	 * Recupere tous les points depuis data
 	 *
-	 * @param data - Objet de type PLYData dans lequel on récupère les points
+	 * @param data - Objet de type PLYData dans lequel on recupere les points
 	 * @return une liste de points depuis data
 	 */
 	public List<Point> getPointsFromData(PLYData data) {
@@ -86,46 +89,7 @@ public class Face {
 	}
 
 	/**
-	 * Calcul la moyenne des couleurs associès au points de la face
-	 * 
-	 * @param listPoint  - Map des points associés à leur id
-	 * @param listPoints - Tableau des id de points
-	 */
-	public void faceColoringAverage(Map<Integer, Point> listPoint, int[] listPoints) {
-		int totalAlpha = 0;
-		int totalRed = 0;
-		int totalGreen = 0;
-		int totalBlue = 0;
-		for (int point : listPoints) {
-			totalAlpha += listPoint.get(point).getColor().getA();
-			totalRed += listPoint.get(point).getColor().getR();
-			totalGreen += listPoint.get(point).getColor().getG();
-			totalBlue += listPoint.get(point).getColor().getB();
-		}
-		int n = listPoints.length;
-		this.color = new Color(totalRed / n, totalGreen / n, totalBlue / n, totalAlpha / n);
-	}
-
-	/**
-	 * Change l'attribut couleur depuis le fichier PLY
-	 * 
-	 * @param parameters     - liste des couleurs
-	 * @param listPointModel - Map des points associés à leur id
-	 * @param listPointsFace - Tableau des id de points
-	 */
-	public void setFaceColorFromPLY(String[] parameters, Map<Integer, Point> listPointModel, int[] listPointsFace) {
-		if (Integer.parseInt(parameters[0]) + 4 == parameters.length) {
-			color = new Color(Integer.parseInt(parameters[Integer.parseInt(parameters[0]) + 1]),
-					Integer.parseInt(parameters[Integer.parseInt(parameters[0]) + 2]),
-					Integer.parseInt(parameters[Integer.parseInt(parameters[0]) + 3]));
-			this.setColor(color);
-		} else {
-			this.faceColoringAverage(listPointModel, listPointsFace);
-		}
-	}
-
-	/**
-	 * Attribue une nouvelle liste d'indice de point à la face
+	 * Attribue une nouvelle liste d'indice de point a la face
 	 * 
 	 * @param points = la nouvelle liste d'indice de point
 	 */
@@ -151,9 +115,50 @@ public class Face {
 		return color;
 	}
 
-	private Point getMinMax(Comparator<Point> compare, PLYData data) {
+	/**
+	 * Retourne la valeur rouge de la face
+	 * 
+	 * @return la valeur rouge de la face
+	 */
+	public double getColorRed() {
+		return this.color.getRed();
+	}
+
+	/**
+	 * Retourne la valeur verte de la face
+	 * 
+	 * @return la valeur verte de la face
+	 */
+	public double getColorGreen() {
+		return this.color.getGreen();
+	}
+
+	/**
+	 * Retourne la valeur bleue de la face
+	 * 
+	 * @return la valeur bleue de la face
+	 */
+	public double getColorBlue() {
+		return this.color.getBlue();
+	}
+
+	/**
+	 * Retourne la valeur de l'opacite de la face
+	 * 
+	 * @return la valeur de l'opacite de la face
+	 */
+	public double getColorOpacity() {
+		return this.color.getOpacity();
+	}
+
+	public Color getColorInit() {
+		return colorInit;
+	}
+
+	private double getMinMax(Comparator<Point> compare, PLYData data, int i) {
 		List<Point> stk = this.getPointsFromData(data);
-		return Collections.min(stk, compare);
+		Point p = new Point(Collections.min(stk, compare));
+		return p.get(i);
 	}
 
 	/**
@@ -162,25 +167,15 @@ public class Face {
 	 * @param i 0 si X, 1 si Y, 2 si Z
 	 * @return retourne le point trouve
 	 */
-	public Point getMin(PLYData data, int i) {
-		Comparator<Point> compare = (arg0, arg1) -> Double.compare(arg0.get(i), arg1.get(i));
-		return getMinMax(compare, data);
-	}
 
-	/**
-	 * Récupère la composante idu point donné en paramètre
-	 * 
-	 * @param p - le point
-	 * @param i - la composante du point, 0 si X, 1 si Y, 2 si Z
-	 * @return un double qui correspond à X, Y ou Z
-	 */
-	public static double get(Point p, int i) {
-		return p.get(i);
+	public double getMin(PLYData data, int i, int y) {
+		Comparator<Point> compare = (arg0, arg1) -> Double.compare(arg0.get(i), arg1.get(i));
+		return getMinMax(compare, data, y);
 	}
 
 	@Override
 	public String toString() {
-		return "Face [points=" + Arrays.toString(points) + ", color=" + color + "]";
+		return "Face [points=" + Arrays.toString(points) + ", color=" + color + ", colorInit=" + colorInit + "]";
 	}
 
 	public int[] getPoints() {
@@ -193,6 +188,32 @@ public class Face {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	/**
+	 * Change la couleur initial
+	 * 
+	 * @param color - la nouvelle couleur initial
+	 */
+	public void setInitColor(Color color) {
+		this.colorInit = color;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	/**
+	 * Renvoie le nombre de points qui composent la face
+	 * 
+	 * @return le nombre de point
+	 */
+	public int getNbPoints() {
+		return this.points.length;
 	}
 
 }
