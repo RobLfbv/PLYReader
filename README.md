@@ -1,11 +1,11 @@
 # Membres de l'équipe
-Noé Delcroix @Noe-Delcroix : https://github.com/Noe-Delcroix
+Noé Delcroix  @Noe-Delcroix : https://github.com/Noe-Delcroix
 
-Constant VENNIN @ConstantVennin : https://github.com/ConstantVennin
+Constant VENNIN  @ConstantVennin : https://github.com/ConstantVennin
 
-Robin LEFEBVRE @RobLfbv : https://github.com/RobLfbv
+Robin LEFEBVRE  @RobLfbv : https://github.com/RobLfbv
 
-Quentin BERNARD @Quentin3010 : https://github.com/Quentin3010
+Quentin BERNARD  @Quentin3010 : https://github.com/Quentin3010
 # Livrable 1
 =======
 
