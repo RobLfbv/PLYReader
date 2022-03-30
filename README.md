@@ -1,8 +1,11 @@
 # Membres de l'équipe
-Noé Delcroix Groupe H
-Constant VENNIN Groupe H
-Robin LEFEBVRE Groupe H
-Quentin BERNARD Groupe H 
+Noé Delcroix @Noe-Delcroix : https://github.com/Noe-Delcroix
+
+Constant VENNIN @ConstantVennin : https://github.com/ConstantVennin
+
+Robin LEFEBVRE Me
+
+Quentin BERNARD @Quentin3010 : https://github.com/Quentin3010
 # Livrable 1
 =======
 
