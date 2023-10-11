@@ -7,11 +7,11 @@ Robin LEFEBVRE  @RobLfbv : https://github.com/RobLfbv
 
 Quentin BERNARD  @Quentin3010 : https://github.com/Quentin3010
 
-Présentation finale : https://www.youtube.com/watch?v=SOkaXM9QqrE
+Présentation Livrable 1 : https://www.youtube.com/watch?v=2lOt7xb55fI
+Présentation Livrable 2 : https://www.youtube.com/watch?v=r2XU5uGzBv8
 
 # Livrable 1
 =======
-https://www.youtube.com/watch?v=2lOt7xb55fI
 
 ## Fonctionnalités implémentées
 
@@ -58,7 +58,6 @@ https://www.youtube.com/watch?v=2lOt7xb55fI
 - Algorithme du peintre crée quelques problèmes lorsqu'on regarde les modèles dans certains angles 
 
 # Livrable 2
-https://www.youtube.com/watch?v=r2XU5uGzBv8
 
 ## Fonctionnalités implémentées
 
