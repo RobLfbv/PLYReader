@@ -6,8 +6,12 @@ Constant VENNIN  @ConstantVennin : https://github.com/ConstantVennin
 Robin LEFEBVRE  @RobLfbv : https://github.com/RobLfbv
 
 Quentin BERNARD  @Quentin3010 : https://github.com/Quentin3010
+
+Présentation finale : https://www.youtube.com/watch?v=SOkaXM9QqrE
+
 # Livrable 1
 =======
+https://www.youtube.com/watch?v=2lOt7xb55fI
 
 ## Fonctionnalités implémentées
 
@@ -54,6 +58,7 @@ Quentin BERNARD  @Quentin3010 : https://github.com/Quentin3010
 - Algorithme du peintre crée quelques problèmes lorsqu'on regarde les modèles dans certains angles 
 
 # Livrable 2
+https://www.youtube.com/watch?v=r2XU5uGzBv8
 
 ## Fonctionnalités implémentées
 
