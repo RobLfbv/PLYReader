@@ -8,6 +8,7 @@ Robin LEFEBVRE  @RobLfbv : https://github.com/RobLfbv
 Quentin BERNARD  @Quentin3010 : https://github.com/Quentin3010
 
 Présentation Livrable 1 : https://www.youtube.com/watch?v=2lOt7xb55fI
+
 Présentation Livrable 2 : https://www.youtube.com/watch?v=r2XU5uGzBv8
 
 # Livrable 1
